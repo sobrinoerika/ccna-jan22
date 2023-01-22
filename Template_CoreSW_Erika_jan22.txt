@@ -1,0 +1,42 @@
+CORE SW
+
+config t
+vlan 25
+   name ____.com
+   exit
+int vlan 25
+   no shut
+   ip address 10.0._._ 255.255._.__
+ip dhcp excluded-address 10.0._._ 10.0._._
+ip dhcp pool ___.com
+   network 10.0._._ 255.255._._
+   default-router 10.0._.__
+   domain-name ___.com
+   dns-server 10.31.1.10
+   option 150 ip 10.31.100.8
+   int Fa 0/7
+     swi acc vlan 25
+	 do sh ip dhcp binding
+
+>>EXAMPLE<<
+
+CORE SW
+
+config t
+vlan 25
+   name Accenture.com
+   exit
+int vlan 25
+   no shut
+   ip address 10.0.16.1 255.255.248.0
+ip dhcp excluded-address 10.0.16.1 10.0.16.50
+ip dhcp pool Accenture.com
+   network 10.0.16.0 255.255.248.0
+   default-router 10.0.16.1
+   domain-name Accenture.com
+   dns-server 10.31.1.10
+   option 150 ip 10.31.100.8
+   int Fa 0/5
+     swi acc vlan 25
+	 do sh ip dhcp binding
+end

@@ -1,0 +1,62 @@
+>>>Static route<<<
+
+
+>R4<
+config t
+ip routing 
+ip route 10.1.1.4 255.255.255.252 10.1.1.9
+ip route 10.1.1.0 255.255.255.252 10.1.1.9
+end
+
+
+
+>R3<
+config t
+ip routing 
+ip route 10.1.4.4 255.255.255.252 10.1.1.10
+ip route 10.1.4.8 255.255.255.252 10.1.1.10
+ip route 10.1.1.0 255.255.255.252 10.1.1.5
+end
+
+>R2<
+config t
+ip routing 
+ip route 10.1.4.4 255.255.255.252 10.1.1.6
+ip route 10.1.4.8 255.255.255.252 10.1.1.6
+ip route 10.1.1.8 255.255.255.252 10.1.1.6
+end
+
+>R1<
+config t
+ip routing 
+ip route 10.1.4.4 255.255.255.252 10.1.1.2
+ip route 10.1.4.8 255.255.255.252 10.1.1.2
+ip route 10.1.1.8 255.255.255.252 10.1.1.2
+ip route 10.1.1.4 255.255.255.252 10.1.1.2
+end
+
+
+>P1<
+conf t
+int e0/0
+  ip add 10.2.1.51 255.255.255.0
+end
+  
+>P2<
+conf t
+int e1/0
+  ip add 10.2.1.52 255.255.255.0
+end
+  
+  
+>>>DEFAULT ROUTES<<<
+
+>P1<
+Config t
+ip route 0.0.0.0 0.0.0.0 10.2.1.1
+end
+
+>P2<
+Config t
+ip route 0.0.0.0 0.0.0.0 10.2.1.2
+end

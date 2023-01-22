@@ -1,0 +1,24 @@
+>>>EIGRP<<<
+
+>D1 and D2<
+conf t
+router eigrp 100
+network 10.0.0.0
+network 192.168.1.0
+no auto-summary
+end
+
+
+>R4<
+Conf t
+router eigrp 100
+network 10.0.0.0
+no auto-summary
+end
+
+
+>>>How to check<<<
+
+show ip eigrp neighbor
+show ip eigrp topology
+show ip route eigrp
